@@ -132,71 +132,122 @@ h3 { font-size: clamp(1.1rem, 3vw, 1.3rem); color: var(--color-text-dark)}
 }
 
 /* Keep Arabic subtitle readable in French view and vice versa */
-html[lang="fr"] .site-subtitle { font-family: var(--font-arabic); }
-html[lang="ar"] .site-subtitle { font-family: var(--font-primary); }
-
-
-.main-navigation ul {
-    list-style: none;
-    display: flex;
-    gap: calc(var(--spacing-unit) * 1.5); /* Space between links */
+.navbar {
+    padding-top: var(--spacing-unit);
+    padding-bottom: var(--spacing-unit);
 }
 
-.main-navigation a {
+.navbar-brand .site-title {
+    margin: 0;
+    font-size: 1.4rem;
     color: var(--color-white);
+    font-weight: 700;
+}
+
+.navbar-brand .site-subtitle {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-top: -5px;
+    color: var(--color-white);
+    line-height: 1.1;
+}
+
+html[lang="fr"] .navbar-brand .site-subtitle { font-family: var(--font-arabic); }
+html[lang="ar"] .navbar-brand .site-subtitle { font-family: var(--font-primary); }
+
+.navbar .nav-link {
+    color: rgba(255, 255, 255, 0.8);
     font-weight: 400;
-    padding: 0.5rem 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-left: var(--spacing-unit);
+    margin-right: var(--spacing-unit);
     position: relative;
     text-transform: uppercase;
     font-size: 0.9rem;
     letter-spacing: 0.5px;
 }
 
-.main-navigation a::after {
+.navbar .nav-link::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 5px;
+    left: var(--spacing-unit);
     width: 0;
     height: 2px;
     background-color: var(--color-primary-light);
     transition: width 0.3s ease;
 }
-html[lang="ar"] .main-navigation a::after { left: auto; right: 0; } /* RTL Adjust */
 
-.main-navigation a:hover::after,
-.main-navigation a:focus::after {
-    width: 100%;
+html[lang="ar"] .navbar .nav-link::after {
+    left: auto;
+    right: var(--spacing-unit);
 }
 
+.navbar .nav-link:hover::after,
+.navbar .nav-link:focus::after {
+    width: calc(100% - (2 * var(--spacing-unit)));
+}
 
-.language-switcher button {
-    background: transparent;
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
     color: var(--color-white);
-    border: 1px solid var(--color-primary-light);
-    padding: 5px 12px;
-    margin-left: var(--spacing-unit); /* Default LTR margin */
-    cursor: pointer;
-    border-radius: 4px;
-    font-weight: 400;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    font-size: 0.85rem;
-    font-family: inherit; /* Ensure button uses body font */
-}
-html[lang="ar"] .language-switcher button {
-    margin-left: 0;
-    margin-right: var(--spacing-unit);
 }
 
-.language-switcher button:hover {
-    background-color: var(--color-primary-med);
-    border-color: var(--color-primary-med);
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.3);
 }
-.language-switcher button.active {
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.language-switcher-nav .lang-btn {
+    --bs-btn-color: var(--color-white);
+    --bs-btn-border-color: var(--color-primary-light);
+    --bs-btn-hover-color: var(--color-primary-dark);
+    --bs-btn-hover-bg: var(--color-white);
+    --bs-btn-hover-border-color: var(--color-white);
+    --bs-btn-active-color: var(--color-primary-dark);
+    --bs-btn-active-bg: var(--color-white);
+    --bs-btn-active-border-color: var(--color-white);
+    padding: 5px 12px;
+    font-size: 0.85rem;
+    font-family: inherit;
+}
+
+.language-switcher-nav .lang-btn.active {
     background-color: var(--color-white);
     color: var(--color-primary-dark);
-    border-color: var(--color-white);
-    font-weight: 700;
+}
+
+@media (max-width: 991.98px) {
+    .navbar .nav-link {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: var(--spacing-unit);
+        padding-right: var(--spacing-unit);
+    }
+
+    .navbar .nav-link::after {
+        left: var(--spacing-unit);
+    }
+
+    html[lang="ar"] .navbar .nav-link::after {
+        left: auto;
+        right: var(--spacing-unit);
+    }
+
+    .navbar .nav-link:hover::after,
+    .navbar .nav-link:focus::after {
+        width: calc(100% - (2 * var(--spacing-unit)));
+    }
+
+    .language-switcher-nav {
+        padding-left: var(--spacing-unit);
+        padding-right: var(--spacing-unit);
+        padding-bottom: var(--spacing-unit);
+    }
 }
 
 /* --- Hero Section --- */
