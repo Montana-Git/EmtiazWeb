@@ -1,0 +1,434 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&family=Outfit:wght@300;400;700&display=swap');
+
+/* --- CSS Variables --- */
+:root {
+    --font-primary: 'Outfit', sans-serif;
+    --font-arabic: 'Noto Sans Arabic', sans-serif;
+
+    --color-primary-dark: #2c5e3d;   /* Dark Green */
+    --color-primary-med: #5a9a68;    /* Medium Green */
+    --color-primary-light: #e8f5e9;  /* Light Green */
+    --color-text-dark: #333333;
+    --color-text-light: #555555;
+    --color-background: #ffffff;
+    --color-background-alt: #f4f7f6; /* Very light gray */
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-overlay: rgba(10, 20, 15, 0.65); /* Darker overlay */
+
+    --container-width: 1140px;
+    --spacing-unit: 1rem; /* Approx 16px */
+}
+
+/* --- General Reset & Base --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 100%; /* Typically 16px */
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.7;
+    color: var(--color-text-dark);
+    background-color: var(--color-background);
+    direction: ltr;
+    text-align: left;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* --- Language Specific Direction & Font --- */
+html[lang="ar"] body {
+    direction: rtl;
+    text-align: right;
+    font-family: var(--font-arabic); /* Apply Arabic font */
+}
+
+/* --- Utility --- */
+.container {
+    max-width: var(--container-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: calc(var(--spacing-unit) * 1.5);
+    padding-right: calc(var(--spacing-unit) * 1.5);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: var(--color-primary-med);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+    color: var(--color-primary-dark);
+}
+
+h1, h2, h3 {
+    line-height: 1.3;
+    margin-bottom: calc(var(--spacing-unit) * 0.75);
+    color: var(--color-primary-dark);
+    font-weight: 700; /* Bolder headings */
+}
+
+h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); } /* Responsive font size */
+h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
+h3 { font-size: clamp(1.1rem, 3vw, 1.3rem); color: var(--color-text-dark)}
+
+
+/* --- Header --- */
+.site-header {
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
+    padding-top: var(--spacing-unit);
+    padding-bottom: var(--spacing-unit);
+    position: sticky; /* Optional: make header sticky */
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping */
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-unit);
+}
+
+.logo-img {
+    height: 40px; /* Adjust as needed */
+    width: auto;
+}
+
+.site-title {
+    margin: 0;
+    font-size: 1.5rem; /* Adjust size */
+    color: var(--color-white);
+}
+
+.site-subtitle {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    display: block;
+    margin-top: -5px;
+    color: var(--color-white);
+}
+
+/* Keep Arabic subtitle readable in French view and vice versa */
+html[lang="fr"] .site-subtitle { font-family: var(--font-arabic); }
+html[lang="ar"] .site-subtitle { font-family: var(--font-primary); }
+
+
+.main-navigation ul {
+    list-style: none;
+    display: flex;
+    gap: calc(var(--spacing-unit) * 1.5); /* Space between links */
+}
+
+.main-navigation a {
+    color: var(--color-white);
+    font-weight: 400;
+    padding: 0.5rem 0;
+    position: relative;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.main-navigation a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary-light);
+    transition: width 0.3s ease;
+}
+html[lang="ar"] .main-navigation a::after { left: auto; right: 0; } /* RTL Adjust */
+
+.main-navigation a:hover::after,
+.main-navigation a:focus::after {
+    width: 100%;
+}
+
+
+.language-switcher button {
+    background: transparent;
+    color: var(--color-white);
+    border: 1px solid var(--color-primary-light);
+    padding: 5px 12px;
+    margin-left: var(--spacing-unit); /* Default LTR margin */
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: 400;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-size: 0.85rem;
+    font-family: inherit; /* Ensure button uses body font */
+}
+html[lang="ar"] .language-switcher button {
+    margin-left: 0;
+    margin-right: var(--spacing-unit);
+}
+
+.language-switcher button:hover {
+    background-color: var(--color-primary-med);
+    border-color: var(--color-primary-med);
+}
+.language-switcher button.active {
+    background-color: var(--color-white);
+    color: var(--color-primary-dark);
+    border-color: var(--color-white);
+    font-weight: 700;
+}
+
+/* --- Hero Section --- */
+#hero {
+    position: relative; /* Crucial for overlay and content positioning */
+    min-height: 70vh; /* Adjust as needed */
+    display: flex;
+    align-items: center; /* Vertically center content */
+    justify-content: center; /* Horizontally center content */
+    text-align: center;
+    color: var(--color-white);
+    overflow: hidden; /* Important */
+}
+
+.video-background-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2; /* Behind overlay */
+    background-color: var(--color-primary-dark); /* Fallback color */
+}
+
+.video-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Scales video to cover area */
+}
+
+#hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-overlay);
+    z-index: -1; /* Between video and content */
+}
+
+.hero-content {
+    position: relative; /* Needed if using z-index, ensures it's above */
+    z-index: 1;
+    padding: calc(var(--spacing-unit) * 2);
+    max-width: 700px;
+}
+
+.hero-content h2 {
+    color: var(--color-white);
+    font-size: clamp(2rem, 6vw, 3.5rem); /* Larger, responsive size */
+    margin-bottom: var(--spacing-unit);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content p {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    opacity: 0.9;
+    margin-bottom: calc(var(--spacing-unit) * 1.5);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Optional Button Styling */
+.cta-button {
+    display: inline-block;
+    background-color: var(--color-primary-med);
+    color: var(--color-white);
+    padding: calc(var(--spacing-unit)*0.75) calc(var(--spacing-unit)*2);
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.cta-button:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+}
+
+
+/* --- Content Sections --- */
+.content-section {
+    padding-top: calc(var(--spacing-unit) * 4);
+    padding-bottom: calc(var(--spacing-unit) * 4);
+}
+
+.content-section h2 {
+    text-align: center;
+    margin-bottom: calc(var(--spacing-unit) * 2.5);
+    position: relative;
+    padding-bottom: var(--spacing-unit);
+}
+
+/* Underline effect for section titles */
+.content-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-primary-med);
+}
+html[lang="ar"] .content-section h2::after { transform: translateX(50%); /* Adjust for RTL */}
+
+
+.section-highlight {
+    background-color: var(--color-background-alt);
+}
+
+/* --- Services Section --- */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive columns */
+    gap: calc(var(--spacing-unit) * 2);
+}
+
+.service-item {
+    background-color: var(--color-background);
+    padding: calc(var(--spacing-unit) * 1.5);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    text-align: center;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.service-icon {
+    color: var(--color-primary-med);
+    margin-bottom: var(--spacing-unit);
+}
+
+.service-item h3 {
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+}
+
+.service-item p {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+}
+
+
+/* --- Contact Section --- */
+.contact-grid {
+  display: grid;
+  gap: calc(var(--spacing-unit) * 3);
+}
+
+/* Basic setup if you add a form later */
+@media (min-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1fr; /* Two columns on larger screens */
+    align-items: start;
+  }
+}
+
+.contact-info p {
+    margin-bottom: var(--spacing-unit);
+}
+.contact-info strong {
+    color: var(--color-primary-dark);
+}
+
+address {
+    font-style: normal;
+}
+
+
+/* --- Footer --- */
+.site-footer {
+    background-color: var(--color-text-dark);
+    color: rgba(255, 255, 255, 0.7);
+    padding-top: calc(var(--spacing-unit) * 1.5);
+    padding-bottom: calc(var(--spacing-unit) * 1.5);
+    text-align: center;
+    margin-top: calc(var(--spacing-unit) * 3);
+    font-size: 0.9rem;
+}
+.site-footer p { margin: 0; }
+
+/* --- Responsiveness --- */
+@media (max-width: 992px) {
+    :root {
+        --container-width: 95%; /* Use percentage for better fit */
+    }
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column; /* Stack header items */
+        align-items: flex-start;
+        gap: var(--spacing-unit);
+    }
+
+    .logo-area { width: 100%; /* Allow space between */ justify-content: space-between; }
+
+    /* You would typically hide the main nav and show a toggle button here */
+    .main-navigation {
+       width: 100%;
+    }
+     .main-navigation ul {
+        flex-direction: column; /* Stack nav items */
+        gap: var(--spacing-unit);
+        align-items: flex-start;
+        padding-top: var(--spacing-unit); /* Add space */
+        padding-bottom: var(--spacing-unit);
+        border-top: 1px solid rgba(255,255,255, 0.1);
+    }
+
+    .language-switcher {
+        align-self: flex-start; /* Align with other items */
+        margin-top: var(--spacing-unit);
+    }
+     html[lang="ltr"] .language-switcher button { margin-left: 0; margin-right: var(--spacing-unit); }
+     html[lang="ar"] .language-switcher button { margin-right: 0; margin-left: var(--spacing-unit); }
+
+
+    #hero {
+        min-height: 50vh;
+    }
+
+    .content-section {
+        padding-top: calc(var(--spacing-unit) * 2.5);
+        padding-bottom: calc(var(--spacing-unit) * 2.5);
+    }
+     .services-grid {
+        grid-template-columns: 1fr; /* Stack service items on mobile */
+     }
+
+     .contact-grid {
+         grid-template-columns: 1fr; /* Stack contact info/form */
+     }
+}
