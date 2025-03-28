@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'contact_text': "Pour discuter de votre projet ou pour plus d'informations, n'hésitez pas à nous contacter :",
             'contact_email': "Email:",
             'contact_phone': "Téléphone:",
+            'contact_fax': "Fax:",
             'contact_address': "Adresse:",
             // 'contact_form_title': "Envoyer un message", // Optional form
             'footer_rights': "Tous droits réservés."
@@ -65,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'contact_text': "لمناقشة مشروعك أو لمزيد من المعلومات، لا تتردد في الاتصال بنا:",
             'contact_email': "البريد الإلكتروني:",
             'contact_phone': "الهاتف:",
+            'contact_fax': "الفاكس:",
             'contact_address': "العنوان:",
             // 'contact_form_title': "أرسل رسالة", // Optional form
             'footer_rights': "جميع الحقوق محفوظة."
